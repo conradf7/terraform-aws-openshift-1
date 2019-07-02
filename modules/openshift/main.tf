@@ -1,7 +1,7 @@
 data "template_file" "deploy_cluster" {
   template = "${file("${path.module}/resources/deploy-cluster.sh")}"
 
-  vars {
+  vars = {
     platform_name           = "${var.platform_name}"
     platform_aws_region     = "${data.aws_region.current.name}"
     openshift_major_version = "${var.openshift_major_version}"
@@ -18,7 +18,7 @@ resource "null_resource" "main" {
     inline = [
       "chmod +x ~/deploy-cluster.sh",
       "tmux new-session -d -s deploycluster ~/deploy-cluster.sh",
-      "sleep 1",                                                  # https://stackoverflow.com/questions/36207752/how-can-i-start-a-remote-service-using-terraform-provisioning
+      "sleep 1", # https://stackoverflow.com/questions/36207752/how-can-i-start-a-remote-service-using-terraform-provisioning
     ]
   }
 

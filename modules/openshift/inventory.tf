@@ -1,7 +1,7 @@
 data "template_file" "template_inventory" {
   template = "${file("${path.module}/resources/template-inventory.yaml")}"
 
-  vars {
+  vars = {
     platform_name                   = "${var.platform_name}"
     ansible_user                    = "${var.bastion_ssh_user}"
     rhn_username                    = "${var.rhn_username}"
