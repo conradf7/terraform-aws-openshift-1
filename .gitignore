@@ -5,3 +5,6 @@ work/
 *.tfstate.*
 .envrc
 *.tfvars
+
+# CF added
+*.plan*
