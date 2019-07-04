@@ -1,10 +1,18 @@
+variable "region" {
+  default = "us-east-1"
+}
+
 variable "platform_name" {
   description = "The name of the cluster that is used for tagging some resources"
 }
 
 variable "availability_zones" {
-  type        = "list"
-  default     = []
+  type    = "list"
+  default = []
+}
+
+variable "platform_cidr" {
+  default = "10.0.0.0/16"
 }
 
 variable "operator_cidrs" {
@@ -71,27 +79,40 @@ variable "platform_domain_administrator_email" {
 }
 
 variable "identity_providers" {
-    type        = "list"
-    description = "The identity providers to enable (AllowAllIdentityProvider, GoogleIdentityProvider)"
-    default     = [
-        "AllowAllIdentityProvider"
-    ]
+  type        = "list"
+  description = "The identity providers to enable (AllowAllIdentityProvider, GoogleIdentityProvider)"
+
+  default = [
+    "AllowAllIdentityProvider",
+  ]
 }
 
 variable "google_client_id" {
-    type        = "string"
-    description = "The Google client id used by the GoogleIdentityProvider"
-    default     = ""
+  type        = "string"
+  description = "The Google client id used by the GoogleIdentityProvider"
+  default     = ""
 }
 
 variable "google_client_secret" {
-    type        = "string"
-    description = "The client secret used by the GoogleIdentityProvider"
-    default     = ""
+  type        = "string"
+  description = "The client secret used by the GoogleIdentityProvider"
+  default     = ""
 }
 
 variable "google_client_domain" {
-    type        = "string"
-    description = "The domain used by the GoogleIdentityProvider"
-    default     = ""
+  type        = "string"
+  description = "The domain used by the GoogleIdentityProvider"
+  default     = ""
+}
+
+variable "public_certificate_pem" {
+  default = ""
+}
+
+variable "public_certificate_key" {
+  default = ""
+}
+
+variable "public_certificate_intermediate_pem" {
+  default = ""
 }

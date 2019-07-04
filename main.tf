@@ -1,11 +1,27 @@
+provider "aws" {
+  alias   = "use1"
+  region  = "us-east-1"
+  version = "~> 2.17"
+}
+
 module "network" {
-  source        = "modules/network"
-  platform_name = "${var.platform_name}"
+  source = "modules/network"
+
+  providers = {
+    "aws" = "aws.use1"
+  }
+
+  platform_name      = "${var.platform_name}"
   availability_zones = "${var.availability_zones}"
+  platform_cidr      = "${var.platform_cidr}"
 }
 
 module "infra" {
   source = "modules/infra"
+
+  providers = {
+    "aws" = "aws.use1"
+  }
 
   platform_name = "${var.platform_name}"
   use_community = "${var.use_community}"
@@ -25,17 +41,12 @@ module "infra" {
   compute_node_instance_type = "${var.compute_node_instance_type}"
 }
 
-module "domain" {
-  source = "modules/domain"
-
-  platform_name                       = "${var.platform_name}"
-  platform_domain                     = "${var.platform_domain}"
-  platform_domain_administrator_email = "${var.platform_domain_administrator_email}"
-  public_lb_arn                       = "${module.infra.public_lb_arn}"
-}
-
 module "openshift" {
   source = "modules/openshift"
+
+  providers = {
+    "aws" = "aws.use1"
+  }
 
   platform_name = "${var.platform_name}"
   use_community = "${var.use_community}"
@@ -49,13 +60,9 @@ module "openshift" {
 
   master_domain                       = "${module.infra.master_domain}"
   platform_domain                     = "${var.platform_domain}"
-  public_certificate_pem              = "${module.domain.public_certificate_pem}"
-  public_certificate_key              = "${module.domain.public_certificate_key}"
-  public_certificate_intermediate_pem = "${module.domain.public_certificate_intermediate_pem}"
+  public_certificate_pem              = "${var.public_certificate_pem}"
+  public_certificate_key              = "${var.public_certificate_key}"
+  public_certificate_intermediate_pem = "${var.public_certificate_intermediate_pem}"
 
-  identity_providers         = "${var.identity_providers}"
-
-  google_client_id           = "${var.google_client_id}"
-  google_client_secret       = "${var.google_client_secret}"
-  google_client_domain       = "${var.google_client_domain}"
+  identity_providers = "${var.identity_providers}"
 }
