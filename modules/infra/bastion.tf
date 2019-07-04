@@ -9,7 +9,7 @@ resource "aws_launch_template" "bastion" {
     device_name = "${local.base_image_root_device_name}"
 
     ebs {
-      volume_size = 32
+      volume_size = 16
     }
   }
 
@@ -17,7 +17,7 @@ resource "aws_launch_template" "bastion" {
 
   instance_market_options = "${local.spot_type[var.use_spot ? "enabled" : "disabled"]}"
 
-  instance_type = "m4.large"
+  instance_type = "t2.small"
 
   iam_instance_profile {
     arn = "${aws_iam_instance_profile.bastion.arn}"
