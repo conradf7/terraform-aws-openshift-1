@@ -1,14 +1,14 @@
 provider "aws" {
-  alias   = "use1"
-  region  = "us-east-1"
+  alias   = "inst"
+  region  = "${var.region}"
   version = "~> 2.17"
 }
 
 module "network" {
-  source = "modules/network"
+  source = "../../modules/network"
 
   providers = {
-    "aws" = "aws.use1"
+    "aws" = "aws.inst"
   }
 
   platform_name      = "${var.platform_name}"
@@ -17,10 +17,10 @@ module "network" {
 }
 
 module "infra" {
-  source = "modules/infra"
+  source = "../../modules/infra"
 
   providers = {
-    "aws" = "aws.use1"
+    "aws" = "aws.inst"
   }
 
   platform_name = "${var.platform_name}"
@@ -42,10 +42,10 @@ module "infra" {
 }
 
 module "openshift" {
-  source = "modules/openshift"
+  source = "../../modules/openshift"
 
   providers = {
-    "aws" = "aws.use1"
+    "aws" = "aws.inst"
   }
 
   platform_name = "${var.platform_name}"
