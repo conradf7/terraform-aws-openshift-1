@@ -3,7 +3,7 @@ variable "region" {
 }
 
 variable "platform_name" {
-  description = "The name of the cluster that is used for tagging some resources"
+  description = "The host name of the cluster"
 }
 
 variable "availability_zones" {

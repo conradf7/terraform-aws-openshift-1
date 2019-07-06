@@ -1,11 +1,15 @@
-output "public_certificate_pem" {
-  value = "${element(concat(acme_certificate.platform_domain.*.certificate_pem, list("")), 0)}"
+output "platform_name" {
+  value = "platform_name"
 }
 
-output "public_certificate_key" {
-  value = "${element(concat(tls_private_key.platform_domain_csr.*.private_key_pem, list("")), 0)}"
+output "platform_domain" {
+  value = "platform_domain"
 }
 
-output "public_certificate_intermediate_pem" {
-  value = "${element(concat(acme_certificate.platform_domain.*.issuer_pem, list("")), 0)}"
+output "platform_domain_administrator_email" {
+  value = "platform_domain_administrator_email"
+}
+
+output "public_lb_arn" {
+  value = "public_lb_arn"
 }

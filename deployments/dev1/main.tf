@@ -16,6 +16,19 @@ module "network" {
   platform_cidr      = "${var.platform_cidr}"
 }
 
+module "domain" {
+  source = "../../modules/domain"
+
+  providers = {
+    "aws" = "aws.inst"
+  }
+
+  platform_name                       = "${var.platform_name}"
+  platform_domain                     = "${var.platform_domain}"
+  platform_domain_administrator_email = "${var.platform_domain_administrator_email}"
+  public_lb_arn                       = "${module.infra.public_lb_arn}"
+}
+
 module "infra" {
   source = "../../modules/infra"
 
