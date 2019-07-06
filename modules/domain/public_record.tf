@@ -1,6 +1,6 @@
 resource "aws_route53_record" "public" {
   zone_id = "${data.aws_route53_zone.public.zone_id}"
-  name    = "${var.platform_name}.${var.platform_domain}"
+  name    = "${var.platform_domain}"
   type    = "A"
 
   alias {
