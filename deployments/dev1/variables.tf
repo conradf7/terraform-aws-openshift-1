@@ -2,6 +2,10 @@ variable "region" {
   default = "us-east-1"
 }
 
+variable "hosted_zone" {
+  description = "public hosted zone"
+}
+
 variable "platform_name" {
   description = "The host name of the cluster"
 }

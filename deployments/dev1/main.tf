@@ -23,6 +23,8 @@ module "domain" {
     "aws" = "aws.inst"
   }
 
+  hosted_zone = "${var.hosted_zone}"
+
   platform_name                       = "${var.platform_name}"
   platform_domain                     = "${var.platform_domain}"
   platform_domain_administrator_email = "${var.platform_domain_administrator_email}"
