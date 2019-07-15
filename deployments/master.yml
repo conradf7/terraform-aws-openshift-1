@@ -1,0 +1,43 @@
+oauthConfig:
+  assetPublicURL: https://dev2.jaic.jhuapl.edu:8443/console/
+  grantConfig:
+    method: auto
+  identityProviders:
+  - challenge: true
+    login: true
+    mappingMethod: claim
+    name: all
+    provider:
+      apiVersion: v1
+      kind: AllowAllPasswordIdentityProvider
+  - challenge: true
+    login: true
+    mappingMethod: claim
+    name: cognito
+    provider:
+      apiVersion: v1
+      kind: OpenIDIdentityProvider
+      clientID: 7bamqotk3aq5cqu74itbh631ht
+      clientSecret: je4e2ocl6bh9ifc9h7p0co4msvcmi8uobsoltkv2aoc2uqn2d4
+      claims:
+        id: 
+        - sub 
+        preferredUsername:
+        - given_name
+        name: 
+        - given_name
+        email:
+        - email
+      urls:
+        authorize: https://jaic.auth.us-east-1.amazoncognito.com/oauth2/authorize
+        token:  https://jaic.auth.us-east-1.amazoncognito.com/oauth2/token    
+  masterCA: ca-bundle.crt
+  masterPublicURL: https://dev2.jaic.jhuapl.edu:8443
+  masterURL: https://master.jaic-dev2.internal:8443
+  sessionConfig:
+    sessionMaxAgeSeconds: 3600
+    sessionName: ssn
+    sessionSecretsFile: /etc/origin/master/session-secrets.yaml
+  tokenConfig:
+    accessTokenMaxAgeSeconds: 86400
+    authorizeTokenMaxAgeSeconds: 500
