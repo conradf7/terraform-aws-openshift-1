@@ -37,6 +37,7 @@ ${use_google_identity_provider == "true" ? "" : "#"}        hostedDomain: "${goo
     openshift_master_bootstrap_auto_approve: true
     openshift_cloudprovider_kind: aws
     openshift_clusterid: ${platform_name}
+    openshift_docker_options: " --log-driver=json-file --log-opt  max-size=10M --log-opt max-file=3 "
     openshift_logging_install_logging: true
     openshift_logging_es_memory_limit: 1024M
     openshift_logging_es_nodeselector:
